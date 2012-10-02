@@ -202,6 +202,8 @@ class LDAPDelegate(Persistent):
             if isinstance(user, LDAPUser):
                 user_dn = user.getUserDN()
                 user_pwd = user._getPassword()
+                if not user_pwd or user_pwd == 'undef':
+                    user_dn = user_pwd = ''
             else:
                 user_dn = user_pwd = ''
 
