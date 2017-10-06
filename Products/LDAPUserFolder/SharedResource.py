@@ -19,10 +19,11 @@ function calls. Access to non-functions is not protected.
 
 A shared resource is identified by an id. The application
 is responsible that id s are unique.
+
+$Id$
 """
 
-from threading import _RLock
-from threading import Lock
+from threading import _RLock, Lock
 
 _ResourceMap = {}
 _ResourceLock = Lock()

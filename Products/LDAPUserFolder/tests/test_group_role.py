@@ -11,6 +11,8 @@
 #
 ##############################################################################
 """ LDAPUserFolder group and role functionality tests
+
+$Id$
 """
 
 import unittest
@@ -18,7 +20,6 @@ import unittest
 from Products.LDAPUserFolder.tests.base.testcase import LDAPTest
 from Products.LDAPUserFolder.tests.config import defaults
 from Products.LDAPUserFolder.tests.config import user2
-
 
 class TestGroups(LDAPTest):
 
@@ -196,4 +197,10 @@ class TestGroups(LDAPTest):
         group_dn = 'cn=%s,%s' % (groupid, acl.groups_base)
         acl.manage_deleteGroups(dns=[group_dn])
         self.failUnless(len(acl.getGroups()) == 0)
+
+
+def test_suite():
+    return unittest.TestSuite((
+        unittest.makeSuite(TestGroups),
+        ))
 

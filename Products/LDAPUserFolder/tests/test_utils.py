@@ -11,6 +11,8 @@
 #
 ##############################################################################
 """ Utility module tests
+
+$Id$
 """
 
 import unittest
@@ -58,3 +60,11 @@ class PasswordCreationTests(unittest.TestCase):
         encoded = utils._createLDAPPassword(self.pwd, 'clear')
         self.assertEquals(reference, encoded)
 
+
+def test_suite():
+    return unittest.TestSuite((
+        unittest.makeSuite(PasswordCreationTests),
+        ))
+
+if __name__ == '__main__':
+    main(defaultTest='test_suite')

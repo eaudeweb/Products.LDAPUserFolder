@@ -11,6 +11,8 @@
 #
 ##############################################################################
 """ LDAPUserFolder server management tests
+
+$Id$
 """
 
 import unittest
@@ -47,4 +49,10 @@ class TestServerManagement(LDAPTest):
         svr = [x for x in acl.getServers() if x['host'] == 'ldap.some.com'][0]
         self.assertEquals(svr['conn_timeout'], 15)
         self.assertEquals(svr['op_timeout'], 10)
+
+
+def test_suite():
+    return unittest.TestSuite((
+        unittest.makeSuite(TestServerManagement),
+        ))
 

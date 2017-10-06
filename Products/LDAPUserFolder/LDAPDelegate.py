@@ -11,8 +11,11 @@
 #
 ##############################################################################
 """ LDAPDelegate: A delegate that performs LDAP operations
+
+$Id$
 """
 
+# General python imports
 import ldap
 from ldapurl import LDAPUrl
 from ldapurl import isLDAPUrl
@@ -21,9 +24,11 @@ from ldap.filter import filter_format
 import logging
 import random
 
+# Zope imports
 from Persistence import Persistent
 from AccessControl.SecurityManagement import getSecurityManager
 
+# LDAPUserFolder package imports
 from Products.LDAPUserFolder.LDAPUser import LDAPUser
 from Products.LDAPUserFolder.SharedResource import getResource
 from Products.LDAPUserFolder.SharedResource import setResource
@@ -203,6 +208,7 @@ class LDAPDelegate(Persistent):
                 user_dn = user.getUserDN()
                 user_pwd = user._getPassword()
                 if not user_pwd or user_pwd == 'undef':
+                    # This user object did not result from a login
                     user_dn = user_pwd = ''
             else:
                 user_dn = user_pwd = ''

@@ -11,6 +11,8 @@
 #
 ##############################################################################
 """ The LDAPUserFolder interface
+
+$Id$
 """
 
 class LDAPUserFolder:

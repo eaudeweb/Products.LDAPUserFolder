@@ -11,10 +11,11 @@
 #
 ##############################################################################
 """ A simple non-persistent user object cache
+
+$Id$
 """
 
 import time
-
 
 class SimpleCache:
     """ A simple non-persistent cache for user objects """

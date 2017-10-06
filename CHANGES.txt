@@ -1,20 +1,20 @@
 Change log for Products.LDAPUserFolder
 ======================================
 
-3.0 (unreleased)
-----------------
-- sanitized buildout test script generation to always use the 
-  ``exportimport`` extra and always test the `GenericSetup` 
-  export/import support
-- Add a simple ``tox`` configuration file to support automated testing
-  on all supported Python versions
-- Add a ``test_require`` and ``test_suite`` argument in ``setup.py``
-  to enable testing using just ``setup.py test``
-- Removed the LDAPUserSatellite code due to severe bit-rot. Please use
-  the PluggableAuthService package in conjunction with LDAPMultiPlugins
-  to gain the same functionality.
-- Removed the CMF tools, please use the package ``Products.CMFLDAP``
-  (see http://pypi.python.org/pypi/Products.CMFLDAP/1.0) instead.
+2.24 (2012-10-18)
+-----------------
+- When comparing a login value to login values found on the LDAP 
+  server strip the login value first. This follows OpenLDAP behavior
+  which considers values as matches even with trailing or leading 
+  spaces in the value query filter.
+  (https://bugs.launchpad.net/bugs/1060080)
+- LDAPDelegate: When using a user from the Zope security machinery 
+  for the purpose of finding a suitable bind DN and password for 
+  connecting to a LDAP server, discard it when it's not been created
+  as the result of a real login and thus has an invalid password
+  (https://bugs.launchpad.net/bugs/1060112)
+- use a known set of component versions (versions.txt from Zope 
+  2.3.18) to avoid having to micromanage dependency versions
 - moved change log entries for version 2.18 and older from CHANGES.txt
   to HISTORY.txt
 - reformat HISTORY.txt and make it ReST-compliant

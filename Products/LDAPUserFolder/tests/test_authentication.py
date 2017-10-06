@@ -11,15 +11,15 @@
 #
 ##############################################################################
 """ LDAPUserFolder authentication tests
+
+$Id$
 """
 
 import unittest
 
 from Products.LDAPUserFolder.tests.base.testcase import LDAPTest
 from Products.LDAPUserFolder.tests.config import user
-
 ug = user.get
-
 
 class TestAuthentication(LDAPTest):
 
@@ -34,6 +34,18 @@ class TestAuthentication(LDAPTest):
                                   )
         self.failIf(user_ob is None)
         user_ob = acl.authenticate( "%s " % # extra space after login attr
+                                    user.get(acl.getProperty('_login_attr'))
+                                  , user.get('user_pw')
+                                  , {}
+                                  )
+        self.failIf(user_ob is None)
+        user_ob = acl.authenticate( " %s" % # extra space before login attr
+                                    user.get(acl.getProperty('_login_attr'))
+                                  , user.get('user_pw')
+                                  , {}
+                                  )
+        self.failIf(user_ob is None)
+        user_ob = acl.authenticate( " %s " % # extra spaces around login attr
                                     user.get(acl.getProperty('_login_attr'))
                                   , user.get('user_pw')
                                   , {}
@@ -72,4 +84,10 @@ class TestAuthentication(LDAPTest):
     
         # now we should be OK
         self.failIf(user_ob is None)
+
+
+def test_suite():
+    return unittest.TestSuite((
+        unittest.makeSuite(TestAuthentication),
+        ))
 

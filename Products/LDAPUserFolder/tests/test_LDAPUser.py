@@ -11,19 +11,22 @@
 #
 ##############################################################################
 """ Tests for the LDAPUser class
+
+$Id$
 """
 
+# General Python imports
 import unittest
 
+# Zope imports
 from DateTime.DateTime import DateTime
 
+# LDAPUserFolder package imports
 from Products.LDAPUserFolder.LDAPUser import LDAPUser
 from Products.LDAPUserFolder.tests.config import user
 from Products.LDAPUserFolder.tests.config import defaults
-
 ug = user.get
 dg = defaults.get
-
 
 class TestLDAPUser(unittest.TestCase):
 
@@ -91,3 +94,13 @@ class TestLDAPUser(unittest.TestCase):
         self.failIf(isinstance(u.getUserName(), unicode))
         self.failIf(isinstance(u.getId(), unicode))
 
+
+def test_suite():
+    suite = unittest.TestSuite()
+    suite.addTest(unittest.makeSuite(TestLDAPUser))
+
+    return suite
+
+if __name__ == '__main__':
+    unittest.main(defaultTest='test_suite')
+    

@@ -11,13 +11,14 @@
 #
 ##############################################################################
 """ LDAPUserFolder schema handling tests
+
+$Id$
 """
 
 import unittest
 
 from Products.LDAPUserFolder.tests.base.testcase import LDAPTest
 from Products.LDAPUserFolder.tests.config import user
-
 
 class TestSchema(LDAPTest):
 
@@ -86,4 +87,10 @@ class TestSchema(LDAPTest):
         user_ob = acl.getUser(user.get(acl.getProperty('_login_attr')))
         self.assertEqual(user.get('mail'), user_ob.getProperty('mail'))
         self.assertEqual(user.get('mail'), user_ob.getProperty('email'))
+
+
+def test_suite():
+    return unittest.TestSuite((
+        unittest.makeSuite(TestSchema),
+        ))
 

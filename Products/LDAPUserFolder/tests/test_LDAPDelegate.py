@@ -11,6 +11,8 @@
 #
 ##############################################################################
 """ Tests for the LDAPDelegate class
+
+$Id$
 """
 
 import unittest
@@ -40,4 +42,14 @@ class TestSimple(unittest.TestCase):
 
         self.assertEquals(delegate._clean_dn(''), '')
         self.assertEquals(delegate._clean_dn(None), '')
+        
+        
+def test_suite():
+    suite = unittest.TestSuite()
+    suite.addTest(unittest.makeSuite(TestSimple))
 
+    return suite
+
+if __name__ == '__main__':
+    unittest.main(defaultTest='test_suite')
+    

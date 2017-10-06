@@ -11,6 +11,8 @@
 #
 ##############################################################################
 """ Shared LDAPUserFolder test configuration data
+
+$Id$
 """
 
 defaults = { 'title'  : 'LDAP User Folder'
@@ -55,6 +57,13 @@ alternates = { 'title'  : 'LDAPUserFolder'
              , 'obj_classes' : 'top, person, inetOrgPerson'
              , 'extra_user_filter' : '(special=true)'
              }
+
+satellite_defaults= { 'title' : 'Satellite'
+                    , 'luf' : '/luftest/acl_users'
+                    , 'recurse' : 0
+                    , 'groups_base' : 'ou=special,dc=dataflake,dc=org'
+                    , 'groups_scope' : 2
+                    }
 
 user = { 'cn' : 'test'
        , 'sn' : 'User'
