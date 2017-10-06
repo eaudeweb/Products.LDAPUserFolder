@@ -706,7 +706,7 @@ class LDAPUserFolder(BasicUserFolder):
         """
         if not value:
             return None
-        
+
         cache_type = pwd and 'authenticated' or 'anonymous'
         negative_cache_key = '%s:%s:%s' % ( name
                                           , value
@@ -729,9 +729,12 @@ class LDAPUserFolder(BasicUserFolder):
             name=name, value=value, pwd=pwd
             )
 
+        conn = getResource('%s-connection' % self._hash, str, ())
         if user_dn is None:
             logger.debug('getUserByAttr: "%s=%s" not found' % (name, value))
-            self._cache('negative').set(negative_cache_key, NonexistingUser())
+            if conn._type() is not str:
+                self._cache('negative').set(negative_cache_key,
+                                            NonexistingUser())
             return None
 
         if user_attrs is None:
@@ -739,7 +742,9 @@ class LDAPUserFolder(BasicUserFolder):
                 name, value
                 )
             logger.debug(msg)
-            self._cache('negative').set(negative_cache_key, NonexistingUser())
+            if conn._type() is not str:
+                self._cache('negative').set(negative_cache_key,
+                                            NonexistingUser())
             return None
 
         if user_roles is None or user_roles == self._roles:
@@ -763,7 +768,9 @@ class LDAPUserFolder(BasicUserFolder):
                     user_dn, self._login_attr
                     )
             logger.debug(msg)
-            self._cache('negative').set(negative_cache_key, NonexistingUser())
+            if conn._type() is not str:
+                self._cache('negative').set(negative_cache_key,
+                                            NonexistingUser())
             return None
 
         if self._uid_attr != 'dn' and len(uid) > 0:
@@ -773,7 +780,9 @@ class LDAPUserFolder(BasicUserFolder):
                     user_dn, self._uid_attr
                     )
             logger.debug(msg)
-            self._cache('negative').set(negative_cache_key, NonexistingUser())
+            if conn._type() is not str:
+                self._cache('negative').set(negative_cache_key,
+                                            NonexistingUser())
             return None
 
         user_obj = LDAPUser( uid
