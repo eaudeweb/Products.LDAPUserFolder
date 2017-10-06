@@ -1,6 +1,9 @@
 Change log for Products.LDAPUserFolder
 ======================================
 
+2.24-edw3 (unreleased)
+-----------------
+
 2.24-edw2 (2012-10-18)
 -----------------
 - Bugfix in setting user cache
